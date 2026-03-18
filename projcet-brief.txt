@@ -1,0 +1,26 @@
+📦 The Core Classes You'll Need
+Start by thinking about what real e-commerce has, then simplify it:
+
+Product — has a name, price, stock quantity, category
+User — has a username, password, and a role (customer vs admin)
+Cart — belongs to a user, holds items + quantities
+Order — a "snapshot" of a completed cart with a status and timestamp
+Store — the main engine that manages everything (products, users, orders)
+
+
+🗺️ Suggested Build Order
+Build it in phases so you always have something working:
+Phase 1 — Products & Admin
+→ Add, update, remove, and list products. Nothing fancy yet, just get OOP working.
+
+Phase 2 — Users & Auth
+→ Register, login, logout. Store passwords hashed (look up the hashlib or bcrypt module — great for your portfolio).
+
+Phase 3 — Shopping (Cart)
+→ Logged-in users can browse, add to cart, remove from cart, see totals.
+
+Phase 4 — Checkout & Orders
+→ Cart becomes an Order. Users can view their order history.
+
+Phase 5 — Storage
+→ Save everything to JSON files or a SQLite database so data persists. (SQLite with Python's built-in sqlite3 module is a great portfolio flex.)
