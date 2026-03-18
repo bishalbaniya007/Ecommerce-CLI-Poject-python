@@ -15,6 +15,20 @@ Phase 1 — Products & Admin
 
 Phase 2 — Users & Auth
 → Register, login, logout. Store passwords hashed (look up the hashlib or bcrypt module — great for your portfolio).
+→ User Class attributes:
+  -user_id
+  -user_name
+  -password
+  -role
+
+→ User Class methods:
+  - check_password()
+  - change_password()
+  -is_Admin()
+
+Note:
+-> Methods shouldn't print() — that's the CLI's job.
+
 
 Phase 3 — Shopping (Cart)
 → Logged-in users can browse, add to cart, remove from cart, see totals.

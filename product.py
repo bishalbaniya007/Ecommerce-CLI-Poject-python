@@ -20,18 +20,22 @@ class Product:
   def restock(self, quantity):
     if quantity > 0:
       self.stock += quantity
+
     else:
       raise ValueError("Restock quantity should be greater than 0")
       # raise keyword:
       # is used to manually trigger an exception, allowing you to signal that an error 
       # or unusual condition has occurred during program
 
+
   # reducing quantity of the existing product
   def reduce_stock(self, quantity):
     if quantity > 0 and quantity <= self.stock:
       self.stock -= quantity
+
     elif quantity <= 0:
       raise ValueError("Quantity should be greater than 0")
+    
     else:
       raise ValueError("Not enough stock")
 
