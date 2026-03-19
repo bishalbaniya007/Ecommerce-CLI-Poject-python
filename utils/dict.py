@@ -7,8 +7,8 @@ print(dict["a"])      # returns the value of a i.e (tuple)
 print(dict["a"][0])   # returns the value in position 0 of a tuple
 print(dict["a"][1])   # returns the value in position 1 of a tuple
 
-dict["a"][1] += 4   # since tuples are immutable this doesnt actually change the value
-print(dict["a"][1]) 
+# dict["a"][1] += 4    since tuples are immutable this doesnt actually change the value
+# print(dict["a"][1]) 
 
 # so the solution for updating the quantity is to use nested dictionary
 items = {
@@ -17,3 +17,17 @@ items = {
     "quantity" : "quantity"
   }
 }
+
+# loopinig through the dictionary
+
+#loops through keys
+for key in dict:
+  print(key)
+
+# loops through values
+for value in dict.values():
+  print(value)
+
+# loop through both key, value
+for key, value in dict.items():
+  print(key, value)

@@ -60,9 +60,13 @@ class Cart:
     else:
       raise ValueError("Not enough stock.")
     
-    
+  # loop through each items in cart and calculate the total   
   def calculate_total(self):
-    pass
+    total = 0
+    for item in self.items.values():
+      total += (item["product"].price * item["quantity"])
+
+    return total
 
   def checkout(self):
     pass
@@ -78,5 +82,7 @@ print(cart.items)
 cart.add_item(p1, 1)    # again adding p1 
 print(cart.items)
 
-cart.remove_item(p1)    # pop p1
-print(cart.items)
+# cart.remove_item(p1)    # pop p1
+# print(cart.items)
+
+print(cart.calculate_total())
