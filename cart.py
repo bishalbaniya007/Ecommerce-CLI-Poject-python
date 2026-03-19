@@ -68,6 +68,10 @@ class Cart:
 
     return total
 
+  # we return the cart 
+  def view_cart(self):
+    return self.items
+
   def checkout(self):
     pass
 
@@ -86,3 +90,4 @@ print(cart.items)
 # print(cart.items)
 
 print(cart.calculate_total())
+print(cart.view_cart())
