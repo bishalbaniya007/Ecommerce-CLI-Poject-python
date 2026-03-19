@@ -7,7 +7,8 @@ class Cart:
   def __init__(self, user_id):
     self.user_id = user_id
     self.items = {}   #  # each user's cart is separate
-   
+
+  # we receive product_obj and quantity as arguments 
   def add_item(self, product, quantity):
     # checking if the quantity is valid and product is in stock
     if quantity > 0 and quantity <= product.stock:
@@ -35,11 +36,15 @@ class Cart:
 
     # Invalid quantity  
     else:
-      raise ValueError("Quantity can not be negative")
+      raise ValueError("Quantity must be greater than 0")
 
-
-  def remove_item(self):
-    pass
+  # we receive product_obj and we pop the product to be removed using product.id
+  def remove_item(self, product):
+    if product.id not in self.items:
+      raise ValueError("Product is not in the cart.")
+    
+    else:
+      self.items.pop(product.id)
 
   def update_quantity(self):
     pass
@@ -51,8 +56,15 @@ class Cart:
     pass
 
 p1 = product.Product("asdf", "pen", 20, 100)
+p2 = product.Product("1111", "book", 100, 100)
 cart = Cart("101")
-print(cart.user_id)
 
-cart.add_item(p1, 20)
+print(cart.items)       # for now cart is empty
+cart.add_item(p1, 99)   # add p1 to the cart
+print(cart.items)
+
+cart.add_item(p1, 1)    # again adding p1 
+print(cart.items)
+
+cart.remove_item(p1)    # pop p1
 print(cart.items)
