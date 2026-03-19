@@ -29,9 +29,25 @@ Phase 2 — Users & Auth
 Note:
 -> Methods shouldn't print() — that's the CLI's job.
 
-
 Phase 3 — Shopping (Cart)
 → Logged-in users can browse, add to cart, remove from cart, see totals.
+
+# constructor:
+Cart is created → empty
+    ↓
+user calls add_item(product, quantity) → item added to dictionary
+    ↓
+user calls add_item(product, quantity) → another item added
+    ↓
+cart now has multiple items
+
+→ Cart class methods:
+  - add_item()
+  - remove_item()
+  - update_quantity()
+  - view_cart()
+  - calculate_total()
+  - checkout()
 
 Phase 4 — Checkout & Orders
 → Cart becomes an Order. Users can view their order history.
