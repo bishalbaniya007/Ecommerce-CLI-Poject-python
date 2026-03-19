@@ -47,7 +47,11 @@ cart now has multiple items
   - update_quantity()
   - calculate_total()
   - view_cart()
-  - checkout()
+  - checkout():
+       # 1. Copy the existing cart
+       # 2. Loop through cart items and reduce stock for each product
+       # 3. Clear the cart after
+       # 4. Return something useful (i.e ordered_items)
 
 Phase 4 — Checkout & Orders
 → Cart becomes an Order. Users can view their order history.
