@@ -46,9 +46,21 @@ class Cart:
     else:
       self.items.pop(product.id)
 
-  def update_quantity(self):
-    pass
+  # get product_obj and new_qty and replace the existing quantity in cart
+  def update_quantity(self, product, new_qty):
+    if product.id not in self.items:
+      raise ValueError("Product is not in the cart.")
 
+    elif new_qty <= 0:
+      raise ValueError("Quantity must be greater than 0.")
+    
+    elif new_qty > 0 and new_qty <= product.stock:
+      self.items[product.id]["quantity"] = new_qty
+      
+    else:
+      raise ValueError("Not enough stock.")
+    
+    
   def calculate_total(self):
     pass
 
