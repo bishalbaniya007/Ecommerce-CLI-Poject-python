@@ -45,8 +45,8 @@ cart now has multiple items
   - add_item()
   - remove_item()
   - update_quantity()
-  - view_cart()
   - calculate_total()
+  - view_cart()
   - checkout()
 
 Phase 4 — Checkout & Orders

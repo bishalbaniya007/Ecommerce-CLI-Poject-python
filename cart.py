@@ -1,5 +1,3 @@
-import product
-
 class Cart:
   # if my_cart (items) stays at the class level, every cart object shares the same dictionary. 
   # So user A's items would show up in user B's cart! 
@@ -72,22 +70,45 @@ class Cart:
   def view_cart(self):
     return self.items
 
+
+  # 1. Copy the existing cart
+  # 2. Loop through cart items and reduce stock for each product
+  # 3. Clear the cart after
+  # 4. Return something useful (i.e ordered_items)
   def checkout(self):
-    pass
+    ordered_items = self.items.copy()   # copies the cart so that i can return it for Order class to user
 
-p1 = product.Product("asdf", "pen", 20, 100)
-p2 = product.Product("1111", "book", 100, 100)
-cart = Cart("101")
+    for item in self.items.values():
+      # -> item["product"] returns product obejcet
+      # -> them we use reduce_stock() method in Product class to reduce the stock
+      # -> same as: item["product"].stock -= quantity
+      quantity = item["quantity"]
+      item["product"].reduce_stock(quantity) 
 
-print(cart.items)       # for now cart is empty
-cart.add_item(p1, 99)   # add p1 to the cart
-print(cart.items)
+    
+    self.items.clear()                  # clear the cart leaving empty dictionary 
 
-cart.add_item(p1, 1)    # again adding p1 
-print(cart.items)
+    return ordered_items
 
-# cart.remove_item(p1)    # pop p1
+
+# p1 = product.Product("asdf", "pen", 20, 100)
+# p2 = product.Product("1111", "book", 100, 100)
+# cart = Cart("101")    # user_id
+
+# print(cart.items)       # for now cart is empty
+# cart.add_item(p1, 9)   # add p1 to the cart
 # print(cart.items)
 
-print(cart.calculate_total())
-print(cart.view_cart())
+# cart.add_item(p1, 1)    # again adding p1 
+# print(cart.items)
+
+# # cart.remove_item(p1)    # pop p1
+# # print(cart.items)
+
+# print(cart.calculate_total())
+# print(cart.view_cart())
+
+# print(f"Before checking out, total stock: {cart.items["asdf"]["product"].stock}")
+# cart.checkout()
+
+# print(f"After checking out, total stock: {cart.items["asdf"]["product"].stock}")
