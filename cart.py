@@ -1,3 +1,5 @@
+import product
+
 class Cart:
   # if my_cart (items) stays at the class level, every cart object shares the same dictionary. 
   # So user A's items would show up in user B's cart! 
@@ -102,8 +104,8 @@ class Cart:
 # cart.add_item(p1, 1)    # again adding p1 
 # print(cart.items)
 
-# # cart.remove_item(p1)    # pop p1
-# # print(cart.items)
+# cart.remove_item(p1)    # pop p1
+# print(cart.items)
 
 # print(cart.calculate_total())
 # print(cart.view_cart())

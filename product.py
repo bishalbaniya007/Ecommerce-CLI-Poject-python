@@ -43,4 +43,4 @@ class Product:
 # product = Product("asdf", "pen", 10, 100)
 # print(product)
 
-# product.reduce_stock(1000)
+# product.reduce_stock(10)

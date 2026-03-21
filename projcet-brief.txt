@@ -53,8 +53,19 @@ cart now has multiple items
        # 3. Clear the cart after
        # 4. Return something useful (i.e ordered_items)
 
-Phase 4 — Checkout & Orders
+Phase 4 — Orders
 → Cart becomes an Order. Users can view their order history.
+
+Order.py
+Attributes:
+  - order_id
+  - Who placed the order? (user_id)
+  - What was ordered? (comes from checkout())
+  - What's the total price?
+  - When was it placed? (datetime.now())
+  - What's the status? (e.g. "pending", "delivered")
+
+For status — give it a default value in __init__ so the caller doesn't have to pass it every time. \
 
 Phase 5 — Storage
 → Save everything to JSON files or a SQLite database so data persists. (SQLite with Python's built-in sqlite3 module is a great portfolio flex.)
