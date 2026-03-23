@@ -11,6 +11,8 @@ class Store:
     self.users = {}
     self.orders = {}
 
+# Product Management methods:
+
   #  the store receives product details and creates a Product object and adds it to self.products.
   # Arguments — the store should receive the raw details and create the Product itself.  
   #           - So arguments should be product_id, name, price, stock and inside the method you create Product(product_id, name, price, stock).
@@ -48,6 +50,7 @@ class Store:
       if stock != None:
         self.products[id].stock = stock
 
+# User Management methods:
 
   # creates new users and adds it to self.users
   def register_users(self, id, name, password, role):
@@ -71,6 +74,7 @@ class Store:
       else:
         raise ValueError("Incorrect password!")
       
+# Order Management methods:
 
   # creates an Order object from a checked-out cart and adds it to self.orders
   def place_order(self, user_id, order_id, cart):   # we receive cart obj as an argument
@@ -87,9 +91,9 @@ class Store:
   def get_user_orders(self, user_id):
     orders = {}   # an empty dict to store all the orders from a user
 
-    for id, order in self.orders.items():
-      if order.user_id == user_id:
-        orders[id] = order    # order_id => key, order_obj => pair
+    for id, order_obj in self.orders.items():
+      if order_obj.user_id == user_id:
+        orders[id] = order_obj    # order_id => key, order_obj => pair
         
     return orders
   
@@ -99,3 +103,15 @@ class Store:
       raise ValueError("Order does not exist!")
     else:
       self.orders[order_id].update_status(new_status)   # calling update_status() in Order class
+
+
+  # Utilities methods:
+  def get_all_products(self):
+    return self.products
+  
+  def get_product(self, id):
+    if id not in self.products:
+      raise ValueError("Product does not exist!")
+    else:
+      return self.products[id]
+
