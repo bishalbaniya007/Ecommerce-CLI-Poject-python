@@ -14,7 +14,6 @@ class Store:
   #  the store receives product details and creates a Product object and adds it to self.products.
   # Arguments — the store should receive the raw details and create the Product itself.  
   #           - So arguments should be product_id, name, price, stock and inside the method you create Product(product_id, name, price, stock).
-  
   def add_product(self, id, name, price, stock):
     my_product = product.Product(id, name, price, stock)
 
@@ -72,3 +71,31 @@ class Store:
       else:
         raise ValueError("Incorrect password!")
       
+
+  # creates an Order object from a checked-out cart and adds it to self.orders
+  def place_order(self, user_id, order_id, cart):   # we receive cart obj as an argument
+    if order_id not in self.orders:
+      total = cart.calculate_total()    # returns total
+      ordered_items = cart.checkout()   # returns ordered_items form cart
+      my_order = order.Order(order_id, user_id, ordered_items, total)
+      self.orders[order_id] = my_order
+
+    else:
+      raise ValueError("Order already exist!")
+
+  # takes a user_id and returns all orders belonging to that user
+  def get_user_orders(self, user_id):
+    orders = {}   # an empty dict to store all the orders from a user
+
+    for id, order in self.orders.items():
+      if order.user_id == user_id:
+        orders[id] = order    # order_id => key, order_obj => pair
+        
+    return orders
+  
+  # order_id to find the order, new_status to pass along
+  def update_order_status(self, order_id, new_status):
+    if order_id not in self.orders:
+      raise ValueError("Order does not exist!")
+    else:
+      self.orders[order_id].update_status(new_status)   # calling update_status() in Order class

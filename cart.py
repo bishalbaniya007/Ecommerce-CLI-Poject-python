@@ -6,7 +6,7 @@ class Cart:
 
   def __init__(self, user_id):
     self.user_id = user_id
-    self.items = {}   #  # each user's cart is separate
+    self.items = {}     # each user's cart is separate
 
   # we receive product_obj and quantity as arguments 
   def add_item(self, product, quantity):

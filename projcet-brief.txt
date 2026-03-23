@@ -114,11 +114,29 @@ Store
     - register_user() — creates a new user and adds to self.users
     - login_user() — finds the user and verifies their password
 
-→ Customer can:
-   → Browse/search products
-   → Register/login
-   → Manage their cart
-   → Place orders
-   → View their own orders
+--> Order management methods:
+    - place_order() — creates an Order object from a checked-out cart and adds it to self.orders
+                    - The cart already exists somewhere — the customer has been adding items to it before checkout. So `place_order()` should **receive** the cart as an argument, not create a new one.
+
+                    customer adds items to cart (in main.py)
+                            ↓
+                    customer says "checkout"
+                            ↓
+                    place_order(user_id, order_id, cart) ← cart is passed in
+                            ↓
+                    cart.checkout() is called here
+
+    
+    - get_user_orders() — takes a user_id and returns all orders belonging to that user 
+                        - (hint: loop through self.orders and filter by user_id)
+                        - A user can have multiple orders, so you shouldn't return inside the loop (that stops after the first match).
+                        - Instead, build a list of matching orders and return it at the end. 
+
+
+    - update_order_status() — admin updates the status of an order
+                            - order_id to find the order
+                            - new_status to pass along
+
+
 
 → Save everything to JSON files or a SQLite database so data persists. (SQLite with Python's built-in sqlite3 module is a great portfolio flex.)
