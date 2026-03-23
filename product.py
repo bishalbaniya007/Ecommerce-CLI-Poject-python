@@ -1,4 +1,4 @@
-# thsi is Product class.
+# this is Product class.
 class Product:
   def __init__(self, id, name, price, stock):
     self.id = id

@@ -1,4 +1,4 @@
-import product
+# import product
 
 class Cart:
   # if my_cart (items) stays at the class level, every cart object shares the same dictionary. 

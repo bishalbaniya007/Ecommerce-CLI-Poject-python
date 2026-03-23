@@ -1,4 +1,4 @@
-import cart
+# import cart
 from datetime import datetime
 
 class Order:
@@ -30,16 +30,16 @@ class Order:
       self.status = new_status
 
 
-cart = cart.Cart("user_id")
-ordered_items = cart.checkout()        # checkout() -> returns ordered items
-total = cart.calculate_total()
+# cart = cart.Cart("user_id")
+# ordered_items = cart.checkout()        # checkout() -> returns ordered items
+# total = cart.calculate_total()
 
-print(ordered_items)
-print(total)
+# print(ordered_items)
+# print(total)
 
-ordered_time = datetime.now()
-print(ordered_time)
+# ordered_time = datetime.now()
+# print(ordered_time)
 
-order = Order("0001", "101", ordered_items, total)
+# order = Order("0001", "101", ordered_items, total)
 
-print(order)
+# print(order)

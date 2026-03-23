@@ -67,5 +67,56 @@ Attributes:
 
 For status — give it a default value in __init__ so the caller doesn't have to pass it every time. \
 
-Phase 5 — Storage
+Phase 5 — Store.py / Storage
+→ store.py is where everything comes together.
+→ Think about it as the manager of the whole system. It holds all the data and coordinates between classes.
+
+Store
+├── manages → {products}  (dict of Product objects)
+├── manages → {users}     (dict of User objects)
+└── manages → {orders}    (dict of Order objects)
+
+
+→ For attributes — what collections does a store need to keep track of?
+  Think about what a real store manages:
+    → Store name
+    → All the products available
+    → All registered users
+    → All placed orders
+
+→ Users dictionary ✅
+    user_id as key, User object as value — clean and fast lookup.
+→ Orders dictionary ✅
+    order_id as key, Order object as value — same logic, perfect.
+→ Products ✅
+    A simple dictionary like users/orders would work fine here too:
+    product_id as key, Product object as value.
+
+
+→ For methods:
+
+--> Product management methods:
+   - add_product() first — the store receives product details and creates a Product object and adds it to self.products.
+          # Arguments — the store should receive the raw details and create the Product itself.  
+           - So arguments should be product_id, name, price, stock and inside the method you create Product        (product_id, name, price, stock).
+
+           Duplicate check — what if a product with the same id already exists? 🤔
+
+  - remove_product()
+
+  - update_product() — an admin might want to update the name, price, or stock of an existing product.
+        — what if the admin only wants to update the price but not the name or stock? 
+        - You don't want to force them to pass all three values every time.
+        - the clean approach is default parameters set to None:
+            def update_product(self, id, name=None, price=None, stock=None):
+
+--> User Mangement methods:
+
+→ Customer can:
+   → Browse/search products
+   → Register/login
+   → Manage their cart
+   → Place orders
+   → View their own orders
+
 → Save everything to JSON files or a SQLite database so data persists. (SQLite with Python's built-in sqlite3 module is a great portfolio flex.)
