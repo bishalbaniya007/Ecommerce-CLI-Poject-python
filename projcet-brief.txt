@@ -111,6 +111,8 @@ Store
             def update_product(self, id, name=None, price=None, stock=None):
 
 --> User Mangement methods:
+    - register_user() — creates a new user and adds to self.users
+    - login_user() — finds the user and verifies their password
 
 → Customer can:
    → Browse/search products
