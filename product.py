@@ -16,6 +16,16 @@ class Product:
   def __str__(self):
     return f"Id: {self.id} | Name: {self.name} | Unit price: Rs. {self.price} | Stock: {self.stock}"
 
+
+  # this one is for the database
+  def to_dict(self):
+    return {
+      "id" : self.id,
+      "name" : self.name,
+      "price" : self.price,
+      "stock" : self.stock
+    }
+
   # re-stocking existing product quantity
   def restock(self, quantity):
     if quantity > 0:

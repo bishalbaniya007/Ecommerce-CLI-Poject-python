@@ -13,7 +13,7 @@ class Store:
 
 # Product Management methods:
 
-  #  the store receives product details and creates a Product object and adds it to self.products.
+  # the store receives product details and creates a Product object and adds it to self.products.
   # Arguments — the store should receive the raw details and create the Product itself.  
   #           - So arguments should be product_id, name, price, stock and inside the method you create Product(product_id, name, price, stock).
   def add_product(self, id, name, price, stock):

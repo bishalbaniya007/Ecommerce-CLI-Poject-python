@@ -11,6 +11,18 @@ class Order:
     self.ordered_at = datetime.now()
 
 
+    # this method is for the databse
+    @classmethod
+    def from_db(cls, order_id, user_id, ordered_items, total, status, ordered_at):
+      order = cls.__new__(cls)
+      order.order_id = order_id
+      order.user_id = user_id
+      order.ordered_items = ordered_items
+      order.total = total
+      order.status = status
+      order.ordered_at = ordered_at
+      return order
+
   def __str__(self):
     items = ""
     for item in self.ordered_items.values():
@@ -43,3 +55,5 @@ class Order:
 # order = Order("0001", "101", ordered_items, total)
 
 # print(order)
+
+

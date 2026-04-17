@@ -1,5 +1,4 @@
-📦 The Core Classes You'll Need
-Start by thinking about what real e-commerce has, then simplify it:
+Classes:
 
 Product — has a name, price, stock quantity, category
 User — has a username, password, and a role (customer vs admin)
@@ -7,9 +6,7 @@ Cart — belongs to a user, holds items + quantities
 Order — a "snapshot" of a completed cart with a status and timestamp
 Store — the main engine that manages everything (products, users, orders)
 
-
-🗺️ Suggested Build Order
-Build it in phases so you always have something working:
+Build Order:
 Phase 1 — Products & Admin
 → Add, update, remove, and list products. Nothing fancy yet, just get OOP working.
 
@@ -67,7 +64,7 @@ Attributes:
 
 For status — give it a default value in __init__ so the caller doesn't have to pass it every time. \
 
-Phase 5 — Store.py / Storage
+Phase 5 — Store.py 
 → store.py is where everything comes together.
 → Think about it as the manager of the whole system. It holds all the data and coordinates between classes.
 
@@ -138,5 +135,44 @@ Store
                             - new_status to pass along
 
 
+Phase 6:  Storage
+→ Save everything to a SQLite database so data persists. (SQLite with Python's built-in sqlite3 module)
 
-→ Save everything to JSON files or a SQLite database so data persists. (SQLite with Python's built-in sqlite3 module is a great portfolio flex.)
+We'll need 3 tables:
+  - products — stores product data
+        products → id, name, price, stock 
+
+  - users — stores user data
+        id TEXT
+        name TEXT
+        password TEXT
+        role TEXT           
+
+  - orders — stores order data
+        id TEXT
+        user_id TEXT
+        ordered_items → TEXT (JSON string)
+        status → TEXT
+        ordered_at → TEXT
+        total → REAL
+
+database.py will have these responsibilities:
+    - Connect to the database and create tables if they don't exist
+                Start with create_tables() — this function should:
+                1. Connect to store.db
+                2. Create a cursor
+                3. Create your 3 tables with the right columns
+                4. Commit and close
+
+    - save_products() needs to do:
+            Receive the products dictionary from Store
+            Connect to the database
+            Loop through each product and INSERT it into the table
+            Commit and close
+
+
+    - load_products() — this is the reverse. It should:
+            Connect to the database
+            SELECT * FROM products
+            Loop through the results and create a Product object for each row
+            Return a dictionary of {id: Product object}

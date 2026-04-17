@@ -12,6 +12,17 @@ class User:
     self.password = hex_dig
     # You can't "unhash" it — hashing is one-way.
 
+
+  # this is 2nd construtor which accepts the already hashed password
+  @classmethod
+  def from_db(cls, id, name, password, role):
+    user = cls.__new__(cls)  # creates empty User object without calling __init__
+    user.id = id
+    user.name = name
+    user.password = password  # already hashed, assign directly!
+    user.role = role
+    return user
+
   # checking a password
   def check_password(self, password):
 
