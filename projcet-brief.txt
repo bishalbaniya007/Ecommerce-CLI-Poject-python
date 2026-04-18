@@ -207,10 +207,27 @@ if __name__ == "__main__":
 main_menu():
  main menu should show options like:
 
-    Login
+    Login:
+        - Ask for id and password
+        - Call store.login_user(id, password) — it returns the user object
+        - Handle wrong credentials with try/except
+        - If successful, check user.is_admin() and call either admin_menu(store, user) 
+        or customer_menu(store, user)
+
     Register:
         When the user chooses Register, you need to:
             - Ask for id, name, password, and role
             - Call my_store.register_users()
             - Handle any exceptions (duplicate user etc.)
     Exit
+
+
+admin_menu(store, user). An admin can:
+
+    Add product
+    Remove product
+    Update product
+    View all products
+    Update order status
+    View all orders
+    Logout
