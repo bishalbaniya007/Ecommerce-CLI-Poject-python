@@ -176,3 +176,41 @@ database.py will have these responsibilities:
             SELECT * FROM products
             Loop through the results and create a Product object for each row
             Return a dictionary of {id: Product object}
+
+
+
+Phase 7: main.py
+
+program starts
+      ↓
+create tables + load data into Store
+      ↓
+show main menu (login / register / exit)
+      ↓
+user logs in
+      ↓
+show either ADMIN menu or CUSTOMER menu
+      ↓
+user does stuff
+      ↓
+save data before exiting
+
+
+if __name__ == "__main__":
+        put your startup code inside it:
+
+        Create tables
+        Load data into Store
+        Call main_menu()
+
+
+main_menu():
+ main menu should show options like:
+
+    Login
+    Register:
+        When the user chooses Register, you need to:
+            - Ask for id, name, password, and role
+            - Call my_store.register_users()
+            - Handle any exceptions (duplicate user etc.)
+    Exit
