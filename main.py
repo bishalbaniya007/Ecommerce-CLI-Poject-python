@@ -12,14 +12,14 @@ def main_menu(store):
     try: 
       choice = int(input("\nEnter your choice: "))
       if choice == 1:
-        print("Logging in")
+        print("\n--- Logging in ---")
+        handle_login(store)
         print("--------------------------------------------\n")
 
       elif choice == 2:
         print("\n--- Registering a new user ---")
         handle_registration(store)
         print("--------------------------------------------\n")
-
 
       elif choice == 3:
         print("Exit")
@@ -34,7 +34,23 @@ def main_menu(store):
       print("Invalid input! Please choose a valid option.")
       print("--------------------------------------------\n")
 
+# this funciton is used to login user in main_menu():
+def handle_login(store):
+  id = input("\nEnter your id: ")
+  password = input("Enter your password: ")
 
+  try:
+    user = store.login_user(id, password) # this returns an user object 
+    if user.is_admin():
+      admin_menu(store, user)
+
+    else:
+      customer_menu(store, user)
+
+  except ValueError as e:
+    print(f"\n{e}")
+
+# this function is to register user in main_menu():
 def handle_registration(store):
   id = input("\nEnter your id: ")
   name = input("Enter your name: ")
@@ -45,10 +61,10 @@ def handle_registration(store):
     try: 
       role_int = int(input("Choose your role: 1. Admin     2. Customer  : "))
       if role_int == 1:
-        role = "Admin"
+        role = "admin"
         break
       elif role_int == 2:
-        role = "Customer"
+        role = "customer"
         break
       else:
         print("Please choose a valid option.")
@@ -63,10 +79,10 @@ def handle_registration(store):
     print(f"\n{e}")
       
 
-def admin_menu():
+def admin_menu(store, user):
   pass
 
-def customer_menu():
+def customer_menu(store, user):
   pass
 
 
