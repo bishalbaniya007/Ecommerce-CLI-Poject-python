@@ -1,5 +1,7 @@
 import database
 from store import Store
+from cart import Cart
+import uuid
 
 def main_menu(store):
   while True:
@@ -81,6 +83,7 @@ def handle_registration(store):
       
 
 def admin_menu(store, user):
+  print(f"--- Welcome, {user.name} ---")
   while True:
     print("\n--- Admin Menu ---")
     print("\n1. Add product")
@@ -106,7 +109,7 @@ def admin_menu(store, user):
       
       elif choice == 3:
         print("\n--- Updating product ---")
-        handle_update_product()
+        handle_update_product(store)
         print("--- Product updated successfully ---\n")
 
       elif choice == 4:
@@ -121,7 +124,7 @@ def admin_menu(store, user):
 
       elif choice == 6:
         print("\n--- All orders ---")
-        handle_view_all_orders(store, user)
+        handle_view_all_orders(store)
         print("--------------------------------------------\n")
 
       elif choice == 7:
@@ -252,15 +255,163 @@ def handle_update_order_status(store):
     
 
 # this function shows all orders of the user
-def handle_view_all_orders(store, user):
+def handle_view_all_orders(store):
   for order in store.orders.values():
     print(order)
 
 
 def customer_menu(store, user):
-  pass
+  cart = Cart(user.id)  # creates cart when customer logs in
+  print(f"\n--- Welcome, {user.name} ---")    # welcome message
+  
+  while True:
+    print("\n--- Customer menu ---")
+    print("\n1. View all products")
+    print("2. Add to cart")
+    print("3. Remove from cart")
+    print("4. View cart")
+    print("5. Update quantity")
+    print("6. Checkout")
+    print("7. View my orders")
+    print("8. Logout")
 
+    try:
+      choice = int(input("Enter your choice: "))
 
+      if choice == 1:
+        print("\n--- All products ---")
+        handle_view_all_products(store)
+        print("--------------------------------------------\n")
+
+      elif choice == 2:
+        print("\n--- Adding product to a cart ---")
+        handle_add_to_cart(store, cart)
+        print("--------------------------------------------\n")
+
+      elif choice == 3:
+        print("\n--- Removing product from a cart ---")
+        handle_remove_product_from_cart(store, cart)
+        print("--------------------------------------------\n")
+
+      elif choice == 4:
+        print("\n--- Viewing my cart ---")
+        handle_view_cart(cart)
+        print("--------------------------------------------\n")
+
+      elif choice == 5:
+        print("\n--- Updating my cart ---")
+        handle_update_cart(store, cart)
+        print("--------------------------------------------\n")
+
+      elif choice == 6:
+        print("\n--- Checking out ---")
+        handle_checkout(store, cart, user)
+        print("--------------------------------------------\n")
+
+      elif choice == 7:
+        print("\n--- Viewing my orders ---")
+        handle_view_orders(store, user)
+        print("--------------------------------------------\n")
+
+      elif choice == 8:
+        print("\n--- Logged out successfully ---")
+        print("--------------------------------------------\n")
+        break
+        
+    except ValueError:
+      print("Invalid input! Please choose a valid option.")
+               
+
+# this function handles adding product to a cart
+def handle_add_to_cart(store, cart):
+  while True:
+    print("\n--- Available products ---")
+    for product in store.get_all_products().values():   # printing available products from store
+      print(product)
+    
+    try:
+      product_id = input("\nEnter the id of the product you want: ")  # getting product_id and quantity
+      quantity = int(input("Enter the quantity: "))
+
+      product = store.get_product(product_id)   # getting product_obj to pass to cart
+
+      cart.add_item(product, quantity)    # passing product_obj and quantity to cart
+
+      print("\n--- Product added to cart ---")
+
+      to_continue = input("\nDo you still wish to continue shopping? (y/n): ")
+      if to_continue.lower() == 'y':
+        continue
+      else:
+        break
+    
+    except ValueError as e:
+      print(f"\n{e}")
+
+# this function handles removing product
+def handle_remove_product_from_cart(store, cart):
+  while True:
+    print("\n--- My cart ---")
+    handle_view_cart(cart)
+
+    try:
+      product_id = input("Enter the product id you want to remove: ")
+      product = store.get_product(product_id)
+      cart.remove_item(product)
+
+      to_continue = input("Do you still wish to continue? (y/n): ")
+      if to_continue.lower() == 'y':
+        continue
+      else:
+        break
+    
+    except ValueError as e:
+      print(f"\n{e}")
+
+# this function prints the products in cart
+def handle_view_cart(cart):
+  for item in cart.view_cart().values():
+    print(f"{item['product'].name} x{item['quantity']}")
+
+# this function hanldes updating qunatity in my cart
+def handle_update_cart(store, cart):
+  print("\n--- My cart ---")
+  handle_view_cart(cart)
+
+  try:
+    product_id = input("Enter the id of the product you want to update: ")
+    product = store.get_product(product_id)   # getting the product obj
+    new_quantity = int(input("Enter the new quantity: "))
+
+    cart.update_quantity(product, new_quantity)
+
+    print("\n--- Product updated successfully ---")
+  except ValueError as e:
+    print(f"\n{e}")
+
+# this function handles checking out
+def handle_checkout(store, cart, user):
+  order_id = str(uuid.uuid4())    # generates order id
+  try:
+    if cart.view_cart():   # view_items returns a cart(dict) and this checks if the cart(dict) is empty or not
+      store.place_order(user.id, order_id, cart)
+
+      
+
+      print("\n--- Checked out successfully ---")
+      
+    else:
+      print("\n--- The cart is empty! Can not checkout. ---")
+
+  except ValueError as e:
+    print(f"\n{e}")
+
+# this funcion prints all the users orders
+def handle_view_orders(store, user):    
+  my_orders = store.get_user_orders(user.id)    # returns orders dict
+
+  for order in my_orders.values():
+    print(order)
 
 if __name__ == "__main__":
   database.create_tables()    # this creates a table i

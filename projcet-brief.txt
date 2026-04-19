@@ -223,11 +223,36 @@ main_menu():
 
 
 admin_menu(store, user). An admin can:
+    - Add product
+    - Remove product
+    - Update product
+    - View all products
+    - Update order status
+    - View all orders
+    - Logout
 
-    Add product
-    Remove product
-    Update product
-    View all products
-    Update order status
-    View all orders
-    Logout
+customer_menu()! 
+    A customer needs:
+
+    - View all products
+
+   -  Add to cart
+        Show all products first so the customer can see what's available
+        Ask for the product_id they want
+        Ask for the quantity
+        Get the product object from the store using store.get_product(id)
+        Call cart.add_item(product, quantity)
+        
+    - View cart
+    - Remove from cart
+    - Update quantity
+
+    - Checkout:
+            Call store.place_order() — but it needs an order_id. Who generates it? Ask the user to enter one, or generate it automatically? uuid module — it generates unique IDs automatically:
+
+            After successful checkout, save orders to database
+            
+            Handle empty cart case — what if the customer tries to checkout with nothing in the cart?
+
+    - View my orders
+    - Logout
