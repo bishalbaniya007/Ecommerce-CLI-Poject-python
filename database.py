@@ -80,7 +80,7 @@ def save_users(users):
 
   c = conn.cursor()
 
-  for user in users.values:
+  for user in users.values():
     c.execute("INSERT OR REPLACE INTO users VALUES (?, ?, ?, ?)", 
               (user.id, user.name, user.password, user.role))
     
@@ -123,7 +123,7 @@ def save_orders(orders):
     
     # ← now INSERT into orders table
     c.execute("INSERT OR REPLACE INTO orders VALUES (?, ?, ?, ?, ?, ?)",
-              (order.id, order.user_id, items_json, order.total, order.status, str(order.ordered_at)))
+              (order.order_id, order.user_id, items_json, order.total, order.status, str(order.ordered_at)))
 
   
   conn.commit()

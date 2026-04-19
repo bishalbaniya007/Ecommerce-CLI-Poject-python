@@ -96,7 +96,7 @@ def admin_menu(store, user):
     print("7. Logout")
 
     try:
-      choice = int(input("Enter your choice: "))
+      choice = int(input("\nEnter your choice: "))
 
       if choice == 1:
         print("\n--- Adding a product ---")
@@ -111,8 +111,8 @@ def admin_menu(store, user):
       elif choice == 3:
         print("\n--- Updating product ---")
         handle_update_product(store)
-        print("--- Product updated successfully ---\n")
-
+        print("--------------------------------------------\n")
+ 
       elif choice == 4:
         print("\n--- All Products ---")
         handle_view_all_products(store)
@@ -282,7 +282,7 @@ def customer_menu(store, user):
     print("8. Logout")
 
     try:
-      choice = int(input("Enter your choice: "))
+      choice = int(input("\nEnter your choice: "))
 
       if choice == 1:
         print("\n--- All products ---")
