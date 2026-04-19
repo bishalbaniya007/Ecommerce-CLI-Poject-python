@@ -77,6 +77,7 @@ def handle_registration(store):
 
   try:  
     store.register_users(id, name, password, role)
+    database.save_users(store.users)    # this saves the changes 
     print("\n--- Registration successfull ---\n")
   except ValueError as e:
     print(f"\n{e}")
@@ -146,6 +147,7 @@ def handle_add_product(store):
 
   try:
     store.add_product(id, name, price, stock)
+    database.save_products(store.products)    # this saves the changes
     print("\n--- Product added successfully ---\n")
   except ValueError as e:
     print(f"\n{e}")
@@ -157,6 +159,7 @@ def handle_remove_product(store):
 
   try:
     store.remove_product(id)
+    database.save_products(store.products)    # this saves the changes
     print("\n--- Product removed successfully ---\n")
   except ValueError as e:
     print(f"\n{e}")
@@ -175,6 +178,7 @@ def handle_update_product(store):
       name = input("Enter the new name: ")
       try:
         store.update_product(id, name=name)
+        database.save_products(store.products)    # this saves the changes
         print("--- Product updated successfully ---")
 
       except ValueError as e:
@@ -184,6 +188,7 @@ def handle_update_product(store):
       price = float(input("Enter the new price: "))
       try:
         store.update_product(id, price = price)
+        database.save_products(store.products)    # this saves the changes
         print("--- Product updated successfully ---")
       
       except ValueError as e:
@@ -194,6 +199,7 @@ def handle_update_product(store):
       stock = int(input("Enter the new stock: "))
       try:
         store.update_product(id, stock=stock)
+        database.save_products(store.products)    # this saves the changes
         print("--- Product updated successfully ---")
       
       except ValueError as e:
@@ -396,7 +402,7 @@ def handle_checkout(store, cart, user):
     if cart.view_cart():   # view_items returns a cart(dict) and this checks if the cart(dict) is empty or not
       store.place_order(user.id, order_id, cart)
 
-      
+      database.save_orders(store.orders) # Save orders after checkout
 
       print("\n--- Checked out successfully ---")
       
