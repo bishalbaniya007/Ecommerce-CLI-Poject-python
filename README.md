@@ -111,13 +111,3 @@ Each layer has one job. The CLI never talks to the database directly, and the mo
 - Layered software architecture
 - Input validation throughout
 
----
-
-## 🌱 Future Improvements
-
-- [ ] Convert to web app using Flask
-- [ ] Add product search and filtering
-- [ ] Add unit tests
-- [ ] Add product categories
-- [ ] Show cart total before checkout
-- [ ] Add password confirmation on register
